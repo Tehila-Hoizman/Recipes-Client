@@ -1,0 +1,38 @@
+.error {
+    background-color: #f3cdd561;
+    color: #a60909;
+    font-size: 0.7rem;
+    border: none;
+    padding: 2px;
+    width: fit-content;
+}
+.input{
+    width: 100% !important;
+    margin: 2px 0 !important;
+    background-color: alpha($color: #fdf6f6);
+}
+.label{
+    font-size: 0.8rem ;
+    text-align: right ;
+    width: 100% ;
+}
+.cont-form{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 10px 0;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: white !important;
+    box-shadow: 0 2px 3px #ccc;
+    transition: all 0.3s ease-out;
+    width: 80% !important;
+}
+.btn-next {
+    background-color: #f3dee3 !important;
+    border: none !important;
+    cursor: pointer !important;
+    font-size: 0.8rem !important;
+    padding: 5px 10px !important;
+    transition: all 0.3s ease-out !important;
+}

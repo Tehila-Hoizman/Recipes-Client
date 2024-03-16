@@ -1,0 +1,30 @@
+.lbl-num-pieces {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-direction: row;
+  color: #741b47;
+  font-family: inherit;
+  font-size: inherit;
+}
+
+input#\:rb\: {
+  height: 50px !important;
+  background-color: transparent !important;
+}
+
+.css-whuxwi:hover {
+  cursor: pointer !important;
+  background: #741b47 !important;
+  border-color: #a6055d !important;
+  color: #F3F6F9 !important;
+}
+
+.css-1cb1cwd:focus {
+  border-color: #741b47 !important;
+  box-shadow: 0 0 0 3px rgba(166, 5, 93, 0.2196078431) !important;
+}
+
+.css-1cb1cwd:hover {
+  border-color: #741b47 !important;
+}/*# sourceMappingURL=NumberPieces.css.map */

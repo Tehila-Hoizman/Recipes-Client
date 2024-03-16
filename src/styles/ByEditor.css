@@ -1,0 +1,42 @@
+.editor-box {
+  width: 100%;
+  margin: 10px;
+}
+
+.byEditors {
+  display: flex;
+  background-color: white;
+  padding: 20px;
+}
+.byEditors a {
+  color: #76110a;
+}
+
+img.MuiAvatar-img {
+  /* color: azure; */
+  background-color: antiquewhite;
+}
+
+.MuiContainer-root.byEditors.MuiContainer-maxWidthLg {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+}
+
+p.MuiTypography-root.byEditors-title.MuiTypography-body1 {
+  width: 100%;
+  /* display: block; */
+  font-size: 27px;
+  text-align: right;
+  color: #76110a;
+  font-family: system-ui;
+}
+
+.to-all-editors {
+  display: flex;
+  width: 100%;
+  flex-direction: row;
+  justify-content: flex-end;
+}/*# sourceMappingURL=ByEditor.css.map */

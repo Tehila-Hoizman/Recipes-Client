@@ -1,0 +1,15 @@
+@import "variable";
+
+.btn-submit{
+    background-color: #4c0200 !important;
+}
+.links-brown{
+    color: $brown-600 !important;
+}
+.icon-signIn,.icon-signUp{
+    background-color: $brown-600 !important;
+}
+.MuiFormLabel-colorPrimary,.css-14s5rfu-MuiFormLabel-root-MuiInputLabel-root,.MuiInputBase-colorPrimary,.MuiFormLabel-root,.MuiInputBase-root,.MuiInputLabel-root{
+    color: $pink-700 !important;
+}
+//  MuiInputLabel-sizeMedium  MuiFormLabel-filled Mui-required MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeMedium MuiInputLabel-outlined css-1jy569b-MuiFormLabel-root-MuiInputLabel-root

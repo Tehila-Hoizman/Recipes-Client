@@ -1,0 +1,12 @@
+.save-recipe-changes-btn {
+  display: flex;
+  justify-content: space-between;
+  width: 102px;
+  border: none;
+}
+
+.header-btns {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}/*# sourceMappingURL=EditRecipeDialog.css.map */

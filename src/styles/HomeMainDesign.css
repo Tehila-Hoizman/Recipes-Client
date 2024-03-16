@@ -1,0 +1,40 @@
+.container {
+  position: relative;
+  width: 100% !important;
+  max-width: 100vw !important;
+  height: 40vw;
+  background-image: url(../../public/bg-home.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: 65% 0%;
+  filter: sepia(0.1);
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  flex-direction: row !important;
+  overflow: hidden; /* Add overflow: hidden to contain the filter layer */
+}
+
+.container::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.content {
+  position: relative;
+  z-index: 1;
+  color: white;
+  text-align: center;
+  padding: 20px;
+}
+
+button {
+  margin: 10px;
+  color: white;
+  background-color: #5b0409;
+  border-radius: 5px;
+}/*# sourceMappingURL=HomeMainDesign.css.map */

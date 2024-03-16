@@ -1,0 +1,8 @@
+@import "variable";
+
+label#customized-hook-demo-label {
+    text-align: right;
+    margin-right: 15px;
+    color: $pink-700;
+    font-weight: 600;
+}

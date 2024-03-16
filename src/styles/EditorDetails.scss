@@ -1,0 +1,33 @@
+.editor-details-profile-box {
+  width: 100% !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  * {
+    color: white !important;
+  }
+}
+.editor-details-profile {
+  width: 100px !important;
+  height: 100px !important;
+}
+.editor-details-to-follow {
+  background-color: #f1b114 !important;
+  color: white !important;
+  width: 100px !important;
+}
+.editor-details-num-recipes {
+  margin: 20px !important;
+  font-size: 25px !important;
+}
+
+.editor-details-box {
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: flex-end !important;
+  background-color: #611510 !important;
+  /* width: 20%; */
+  /* flex-wrap: nowrap; */
+  padding: 20px !important;
+  margin-top: 20px !important;
+}

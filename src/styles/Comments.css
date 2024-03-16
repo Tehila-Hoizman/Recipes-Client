@@ -1,0 +1,28 @@
+.comment-container {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  margin: 20px 0;
+  width: 80%;
+}
+
+.comment-detail-box {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.user-box {
+  margin-left: 12px;
+}
+
+.comment-box {
+  background-color: #f8f9fa;
+  width: 100%;
+  padding: 10px;
+}
+
+.comment-content-text {
+  text-align: right;
+}/*# sourceMappingURL=Comments.css.map */

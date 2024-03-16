@@ -1,0 +1,14 @@
+@import "~react-image-gallery/styles/scss/image-gallery.scss";
+
+
+.image-gallery-left-nav .image-gallery-svg, .image-gallery-right-nav .image-gallery-svg {
+    display: none;
+}
+.gallery {
+    width: 100%;
+    object-fit: cover;
+    height: 27vw;//31
+
+     max-height: 100% !important;
+
+}

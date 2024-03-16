@@ -1,0 +1,15 @@
+.allCategories-header {
+  width: 100% !important;
+  height: 216px !important;
+  background-color: #76110a !important;
+  color: white !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  margin-bottom: 50px !important;
+}
+
+.allCategories-header-title {
+  font-size: 49px !important;
+  font-family: system-ui !important;
+}/*# sourceMappingURL=CategoryDetails.css.map */

@@ -1,0 +1,45 @@
+.categoryCard {
+  width: 18rem;
+  height: 15rem;
+  position: relative;
+}
+.categoryCard::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.2);
+}
+.categoryCard .categoryCard-box.MuiBox-root.css-0 {
+  height: 100%;
+  width: 100%;
+}
+.categoryCard button.MuiButtonBase-root.MuiButton-root.MuiButton-text.categoryCard-btn {
+  height: 100%;
+  width: 100%;
+  padding: 0px;
+}
+.categoryCard .MuiButton-label {
+  width: 100%;
+  display: inherit;
+  align-items: inherit;
+  justify-content: inherit;
+  /* height: 100%; */
+  height: 100%;
+}
+.categoryCard .categoryCard-img {
+  -o-object-fit: cover;
+     object-fit: cover;
+  height: 100%;
+  width: 100%;
+}
+.categoryCard .categoryCard-txt {
+  position: absolute;
+  overflow: hidden;
+  height: 30px;
+  color: white;
+  font-size: 24px;
+  z-index: 1;
+}/*# sourceMappingURL=Category.css.map */

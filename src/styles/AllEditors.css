@@ -1,0 +1,27 @@
+.allEditors {
+  display: flex !important;
+  background-color: white !important;
+  padding: 20px !important;
+  flex-wrap: wrap !important;
+}
+
+img.MuiAvatar-img {
+  /* color: azure; */
+  background-color: antiquewhite !important;
+}
+
+.allEditors-header {
+  width: 100% !important;
+  height: 216px !important;
+  background-color: #76110a !important;
+  color: white !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  margin-bottom: 50px !important;
+}
+
+.allEditors-header-title {
+  font-size: 49px !important;
+  font-family: system-ui !important;
+}/*# sourceMappingURL=AllEditors.css.map */

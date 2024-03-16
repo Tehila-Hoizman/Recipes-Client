@@ -1,0 +1,36 @@
+.MuiContainer-root.byCategories.MuiContainer-maxWidthLg {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    background-color: white ;
+    margin: 10px;
+
+    p.MuiTypography-root.byCategories-title.MuiTypography-body1 {
+        /* display: block; */
+        width: 100%;
+    }
+    .byCategories-box {
+        margin: 10px;
+    }
+   .to-all-categories {
+        display: flex;
+        width: 100%;
+        flex-direction: row;
+        justify-content: flex-end;
+    }
+
+    a {
+        color: #76110a;
+    }
+    p.MuiTypography-root.byCategories-title.MuiTypography-body1 {
+        font-size: 27px;
+        text-align: right;
+        color: #76110a;
+        font-family: system-ui;
+    }
+}
+.design-container {
+    display: flex;
+    justify-content: center;
+}

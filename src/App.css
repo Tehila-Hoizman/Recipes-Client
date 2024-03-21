@@ -4,8 +4,7 @@
   background-size: cover;
   background-repeat: no-repeat;
    */
-   background-color: #311e1b !important;
-
+  background-color: #311e1b !important;
 }
 
 .App-logo {
@@ -50,4 +49,17 @@
 
 .main-content {
   flex-grow: 1;
+}
+
+@font-face {
+  font-family: 'Assistant';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Assistant'), url('./fonts/Assistant/Assistant-VariableFont_wght.ttf') format('truetype');
+}
+body {
+  font-family: "Assistant", sans-serif !important;
+}
+* {
+  font-family: "Assistant", sans-serif !important;
 }

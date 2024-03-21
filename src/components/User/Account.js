@@ -31,8 +31,7 @@ export default function Account() {
   const [file, setFile] = React.useState(user.UrlImage);
   const [selectedImage, setSelectedImage] = React.useState(null);
   const alert = useSelector((state) => state.login.alert);
-  // const image = user && user.urlUpdateImage ? user.urlUpdateImage : null;
-  const image = useSelector((state) => state.login.user.urlUpdateImage);
+  const image = useSelector((state) => state.login.user.urlImage);
   const imageUrl = useSelector((state) => state.login.user.urlImage);
   const [openSuccess, setOpenSuccess] = useState(false);
 
@@ -42,56 +41,24 @@ export default function Account() {
     navigate("/");
   }
   useEffect(() => {
-    if (image&&image!="error"&&image=="") {
-      const base64String = image; // replace with your base64 string
-      const filename = imageUrl;
-
-      fetch(base64String)
-        .then((res) => res.blob())
-        .then((blob) => {
-          const file = new File([blob], filename, { type: "image/jpeg" });
-          console.log(file);
-          dispatch(setUser({...user,urlUpdateImage:file}));
-        });
-      setSelectedImage(image);
-    }
+      setSelectedImage(user.urlImage);
   }, []);
   let selectedFile = image;
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log(data);
-    let obj = {
-      id: user.id,
-      firstName: data.get("firstName"),
-      lastName: data.get("lastName"),
-      email: user.email,
-      password: data.get("password"),
-      level: 0,
-      wantNewsletter: 0,
-      filelImage:user.urlUpdateImage,
-      urlImage: null,
-    };
-    console.log(obj);
-    console.log("user", user);
     let res =await dispatch(updateUser(user));
-    console.log(res);
-    if (updateUser.fulfilled.match(res)) {
-      dispatch( setUser(obj));
+    if(updateUser.fulfilled.match(res)){
+      setOpenSuccess(true);
     }
+    console.log(res);
   };
 React.useEffect(() => {
   console.log("user-after-refresh: ", user);
     if (isConnect === false) {
       navigate("/login");
     }
-
   }, [isConnect]);
-  useEffect(() => {
-    if(image)
-    setSelectedImage(image);
-  }, []);
 
   const handleImageUpload = (e) => {
     selectedFile = e.target.files[0];
@@ -115,7 +82,7 @@ React.useEffect(() => {
     console.log("selectedFile", selectedFile);
     console.log("selectedImage", selectedImage);
     console.log("file", file);
-    dispatch(setUser({...user,urlUpdateImage:selectedFile}));
+    dispatch(setUser({...user,filelImage:selectedFile}));
   };
   const handleChange = (e) => {
     let obj = { ...user };
@@ -190,7 +157,7 @@ React.useEffect(() => {
                 />
               </Grid>
               <Grid item sx={{ height: "50px" }} xs={12}>
-        <label htmlFor="image-upload"> תמונה של המתכון</label>
+        <label htmlFor="image-upload"> תמונת פרופיל</label>
         <Input
           type="file"
           onChange={handleImageUpload}
@@ -204,7 +171,7 @@ React.useEffect(() => {
           name="urlUpdateImage" // Set a unique id for the input
         />
 
-        {selectedImage && <img className="display-image" src={selectedImage} />}
+        {/* {selectedImage && <img className="display-image" src={selectedImage} />} */}
       </Grid>
               <Box>
                 <img
@@ -226,7 +193,7 @@ React.useEffect(() => {
             </Button>
           </Box>
         </Box>
-        <DialogMessage setOpen={setOpenSuccess} open={openSuccess} handleClick={handleClose} message="נרשמת בהצלחה"/>
+        <DialogMessage setOpen={setOpenSuccess} open={openSuccess} handleClick={handleClose} message="החשבון עודכן בהצלחה"/>
 
       </Container>
     </ThemeProvider>

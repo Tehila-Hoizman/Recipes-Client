@@ -1,26 +1,34 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchRecipies, removeRecipe } from "../../store/recipiesSlice.js";
 import Recipe from "./Recipe.js";
 import { CircularProgress } from "@material-ui/core";
+import Search from "../HomePage/Search.js";
+import { useState } from "react";
+import "../../styles/Recipes.css";
 const Recipies = () => {
   const recipies = useSelector((state) => state.recipies.recipies);
   const status = useSelector((state) => state.recipies.status);
-  const dispatch = useDispatch();
-
+  const [search, setSearch] = useState("");
+  const [filteredRecipies, setFilteredRecipies] = useState([]);
   useEffect(() => {
-    console.log(status);
-    console.log(recipies);
-    console.log("in useeffect");
-    // if (status != 'fulfilled')
-    //     dispatch(fetchRecipies())
-  }, []);
+    window.scrollTo(0, 0);
+    setFilteredRecipies([...recipies]);
+  }
+  ,[]);
+  useEffect(() => {
+    console.log("recipies", recipies);
+    setFilteredRecipies(recipies.filter((recipe) => recipe.name.includes(search)));
+  }
+  , [search]);
   return (
     <>
 
       {recipies&&Array.isArray(recipies)&&recipies.length > 0 && (
         <div>
+          <div className="header-recipes">
           <h1>המתכונים שלנו</h1>
+          </div>
+          <Search  setSearch = {setSearch} search = {search}/>
           {status === "pending" && (
             <div
               className="loading"
@@ -35,7 +43,7 @@ const Recipies = () => {
             </div>
           )}
           {status === "fulfilled" &&
-            recipies.map((v, i) => <Recipe recipe={v} key={i} />)}
+            filteredRecipies.map((v, i) => <Recipe recipe={v} key={i} />)}
         </div>
       )}
     </>

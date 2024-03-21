@@ -38,7 +38,10 @@ const AddCategory = () => {
   const succeed =()=>{
     navigate("/");
   }
-
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }
+  ,[]);
   const handleImageUpload = (e) => {
     const selectedFile = e.target.files[0];
     if (!selectedFile) {

@@ -11,11 +11,14 @@ import Category from "./Category";
 import { useSelector } from "react-redux";
 import "../../styles/ByCategory.css";
 import { Link } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 const ByCategories = () => {
   const categories = useSelector((state) => state.categories.categories);
 
-
+useEffect(() => {
+  window.scrollTo(0, 0);
+}
+,[]);
 
   return (
     <div className="design-container">

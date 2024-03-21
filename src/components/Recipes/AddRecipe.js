@@ -29,11 +29,16 @@ import Second from "../Steps/second";
 import Third from "../Steps/third";
 import Fourth from "../Steps/fourth";
 import { pushRecipe, setNumOfPieces } from "../../store/recipiesSlice";
-import { addIngredient, deleteIngredient, editIngredient } from "../../store/ingredientsSlice";
+import {
+  addIngredient,
+  deleteIngredient,
+  editIngredient,
+} from "../../store/ingredientsSlice";
 import "../../styles/AddRecipe.css";
 import DialogMessage from "../Dialogs/DialogMessage";
 import { useState } from "react";
 import { useNavigate } from "react-router";
+import { useEffect } from "react";
 
 const steps = ["פרטי המתכון", "מצרכים", "הוראות הכנה", "תמונות"];
 
@@ -59,7 +64,7 @@ export default function HorizontalLinearStepper() {
   const recipies = useSelector((state) => state.recipies.recipies);
   const ingredientsList = useSelector((state) => state.ingredients.ingredients);
   const categoriesList = useSelector((state) => state.categories.categories);
-const [ingToDelete,setIngToDelete] = useState([]);
+  const [ingToDelete, setIngToDelete] = useState([]);
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -71,9 +76,11 @@ const [ingToDelete,setIngToDelete] = useState([]);
   };
   const handleCloseMessage = () => {
     navigate("/");
+    if (type === "edit")
+    window.location.reload();
   };
   const clearFields = () => {
-    dispatch(setIngredients([{ name: "", amount: "", measure: "" ,id:0}]));
+    dispatch(setIngredients([{ name: "", amount: "", measure: "", id: 0 }]));
     dispatch(setCategories(null));
     dispatch(setDescription(""));
     dispatch(setDifficultyLevel(1));
@@ -105,7 +112,8 @@ const [ingToDelete,setIngToDelete] = useState([]);
       console.log("category", categories);
 
       console.log("status", status);
-      if (type == "add") {
+      console.log("ingredients", ingredients);
+      if (type === "add") {
         const resultAction = await dispatch(addRecipe(obj));
         if (addRecipe.fulfilled.match(resultAction)) {
           clearFields();
@@ -125,7 +133,7 @@ const [ingToDelete,setIngToDelete] = useState([]);
           setOpenSuccess(true);
         }
       }
-      if (type == "edit") {
+      if (type === "edit") {
         console.log("editId", editId);
         const resultAction = await dispatch(editRecipe(obj));
         if (editRecipe.fulfilled.match(resultAction)) {
@@ -141,7 +149,7 @@ const [ingToDelete,setIngToDelete] = useState([]);
                 measure: ingredient.measure,
                 recipeId: editId,
               };
-              console.log("ooo",obj);
+              console.log("ooo", obj);
               return dispatch(editIngredient(obj));
             });
             let res = await Promise.all(editAllIngredients);
@@ -150,6 +158,7 @@ const [ingToDelete,setIngToDelete] = useState([]);
               return dispatch(deleteIngredient(id));
             });
             let resDelete = await Promise.all(deleteAllIngredients);
+          
             setOpenSuccess(true);
           } catch (e) {
             console.log(e);
@@ -185,7 +194,14 @@ const [ingToDelete,setIngToDelete] = useState([]);
       case 1:
         return <Second handleNext={handleNext} handleBack={handleBack} />;
       case 2:
-        return <Third ingToDelete={ingToDelete} setIngToDelete={setIngToDelete} handleNext={handleNext} handleBack={handleBack} />;
+        return (
+          <Third
+            ingToDelete={ingToDelete}
+            setIngToDelete={setIngToDelete}
+            handleNext={handleNext}
+            handleBack={handleBack}
+          />
+        );
       case 3:
         return <Fourth handleNext={handleNext} handleBack={handleBack} />;
       default:
@@ -202,6 +218,7 @@ const [ingToDelete,setIngToDelete] = useState([]);
     dispatch(setTimeToMake(1));
     dispatch(setInstructions(""));
     dispatch(setImageUrl(""));
+    dispatch(setImage(null));
     dispatch(setNumOfPieces(1));
   };
   const editRecipeDetails = () => {
@@ -238,6 +255,10 @@ const [ingToDelete,setIngToDelete] = useState([]);
       }
     }
   };
+  // useEffect(()=>{
+  //   setActiveStep(0);
+  //   clearFields();
+  // },[])
   React.useEffect(() => {
     if (type === "add") {
       newRecipe();
@@ -309,7 +330,9 @@ const [ingToDelete,setIngToDelete] = useState([]);
                 handleClick={handleCloseMessage}
                 setOpen={setOpenSuccess}
                 open={openSuccess}
-                message={type=="add"? "המתכון נוסף בהצלחה":"המתכון עודכן בהצלחה"}
+                message={
+                  type == "add" ? "המתכון נוסף בהצלחה" : "המתכון עודכן בהצלחה"
+                }
               />
             </Container>
           </React.Fragment>

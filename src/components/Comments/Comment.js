@@ -8,7 +8,7 @@ import { deleteComment, popComment } from "../../store/commentsSlice.js";
 const Comment = (props) => {
   const { comment } = props;
   const dispatch = useDispatch();
-  const image =comment && comment.urlUpdateImageUser ? comment.urlUpdateImageUser : null;
+  const image =comment && comment.urlImageUser ? comment.urlImageUser : null;
 
   const handleClick = () => {
     dispatch(deleteComment(comment.id));

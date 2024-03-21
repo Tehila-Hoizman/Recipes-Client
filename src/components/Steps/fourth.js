@@ -12,26 +12,29 @@ const Fourth = (props) => {
   const handleBack = props.handleBack;
   const dispatch = useDispatch();
 
-  const image = useSelector((state) => state.addRecipe.image);
-  const imageUrl = useSelector((state) => state.addRecipe.imageUrl);
+  const image = useSelector((state) => state.addRecipe.imageUrl);
+  // const imageUrl = useSelector((state) => state.addRecipe.imageUrl);
   const [file, setFile] = React.useState(null);
   const [selectedImage, setSelectedImage] = React.useState(null);
 
-  useEffect(() => {
-    if (image) {
-      const base64String = image; // replace with your base64 string
-      const filename = imageUrl;
-
-      fetch(base64String)
-        .then((res) => res.blob())
-        .then((blob) => {
-          const file = new File([blob], filename, { type: "image/jpeg" });
-          console.log(file);
-          dispatch(setImage(file));
-        });
-      setSelectedImage(image);
-    }
-  }, []);
+//   useEffect(() => {
+//     if (image) {
+//       const base64String = image; // replace with your base64 string
+//       const filename = imageUrl;
+// debugger
+//       fetch(base64String)
+//         .then((res) => res.blob())
+//         .then((blob) => {
+//           const file = new File([blob], filename, { type: "image/jpeg" });
+//           console.log(file);
+//           dispatch(setImage(file));
+//         });
+//       setSelectedImage(image);
+//     }
+//   }, [image, imageUrl]);
+useEffect(() => {
+  setSelectedImage(image);
+}, []);
   let selectedFile = image;
   const handleImageUpload = (e) => {
     selectedFile = e.target.files[0];
@@ -60,59 +63,6 @@ const Fourth = (props) => {
 
   return (
     <Container>
-      {/* <Box className="box-images">
-        <label className="label">העלאת תמונות</label>
-        <div className="input inp-images">
-          <input
-            type="file"
-            accept="image/*"
-            multiple
-            onChange={handleImageChange}
-          />
-        </div>
-
-        <Box className="images-container">
-          {Array.isArray(images) &&
-            images.map((image, index) => {
-              return (
-                <Box
-                  className="image"
-                  key={index}
-                  sx={{
-                    position: "relative",
-                    display: "inline-block",
-                    marginRight: "10px",
-                  }}
-                >
-                  <img
-                    src={image.name}
-                    alt={`Upload_${index}`}
-                    height="100"
-                    width="100"
-                  />
-                  <button
-                    onClick={() => handleRemoveImage(index)}
-                    style={{
-                      position: "absolute",
-                      top: "0px",
-                      right: "0px",
-                      background: "#76110a",
-                      color: "white",
-                      padding: " 3px 6px",
-                      fontSize: "7px",
-                      cursor: "pointer",
-                      zIndex: 1,
-                      border: "none",
-                    }}
-                    className="remove"
-                  >
-                    X
-                  </button>
-                </Box>
-              );
-            })}
-        </Box>
-      </Box> */}
       <Grid item sx={{ height: "50px" }} xs={12}>
         <label htmlFor="image-upload"> תמונה של המתכון</label>
         <Input

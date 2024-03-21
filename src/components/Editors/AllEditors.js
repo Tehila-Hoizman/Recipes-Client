@@ -6,6 +6,10 @@ import "../../styles/AllEditors.css"
 import { getEditors } from "../../store/recipiesSlice";
 const AllEditors = () => {
   const dispatch = useDispatch();
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }
+  ,[]);
     const editors = useSelector((state) => state.recipies.editors);
     return ( 
       <Container className="allEditors">

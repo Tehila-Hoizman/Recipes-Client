@@ -20,4 +20,41 @@ body, html {
   direction: rtl;
   background-color: #311e1b;
   min-width: 100% !important;
+}
+
+.categories-items-footer {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 26%;
+  height: 100%;
+  overflow: hidden;
+  align-content: center;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.a-category-footer {
+  width: -moz-fit-content;
+  width: fit-content;
+  padding: 0 10px;
+  height: -moz-fit-content !important;
+  height: fit-content !important;
+}
+.a-category-footer * {
+  color: white;
+}
+
+.title-categories-footer {
+  color: white;
+  width: 100%;
+  text-align: right;
+  padding: 10px;
+  font-size: 21px;
+}
+
+.categories-footer {
+  width: 35%;
+  display: flex;
+  flex-direction: column;
 }/*# sourceMappingURL=Footer.css.map */

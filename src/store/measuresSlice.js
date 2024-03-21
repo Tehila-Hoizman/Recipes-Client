@@ -1,11 +1,12 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 import { useDispatch } from "react-redux";
+
 const initialState = {
-    measures: [],   
-  status: 'init'
+  measures: [],
+  status: "init",
 };
-// const dispatch = useDispatch();
+
 export const fetchMeasures = createAsyncThunk("fetchMeasures", async () => {
   try {
     const res = await axios.get(`https://localhost:7161/api/Measure`);
@@ -17,12 +18,10 @@ export const fetchMeasures = createAsyncThunk("fetchMeasures", async () => {
   }
 });
 
-
 export const measuresSlice = createSlice({
   name: "measures",
   initialState,
-  reducers: {
-  },
+  reducers: {},
   extraReducers: (builder) => {
     builder.addCase(fetchMeasures.fulfilled, (state, action) => {
       state.status = "fulfilled";
@@ -31,6 +30,5 @@ export const measuresSlice = createSlice({
     });
   },
 });
-export const { } =
-measuresSlice.actions;
+export const {} = measuresSlice.actions;
 export default measuresSlice.reducer;

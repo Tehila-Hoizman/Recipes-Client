@@ -23,15 +23,17 @@ import { setIngredients, setType } from "../store/addRecipeSlice";
 import { useEffect, useState } from "react";
 import DialogAnswer from "./Dialogs/DialogAnswer";
 
-const pages = ["קטגוריות", "העורכים שלנו", "מתכונים"];
+const pages = ["קטגוריות", "העורכים שלנו", "מתכונים","צור קשר"];
 const settings = ["פרופיל", "אזור אישי", "התנתקות"];
 
 function ResponsiveAppBar() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
   const user = useSelector((state) => state.login.user);
+  const type = useSelector((state) => state.addRecipe.type);
+  // const image = useSelector((state) => state.login.user.urlImage)||"";
   const isConnect = useSelector((state) => state.login.isConnect);
-  let image=useSelector((state)=>state.login.image);
+  // let image=useSelector((state)=>state.login.image);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [openFailed, setOpenFailed] = useState(false);
@@ -39,28 +41,29 @@ function ResponsiveAppBar() {
   const goSignIn = () => {
     navigate("/signin");
   };
-  useEffect(() => {
-    if (user.urlUpdateImage) {
-      const base64String = user.urlUpdateImage; // replace with your base64 string
-      const filename = user.urlImage;
+  // useEffect(() => {
+  //   if (user.urlUpdateImage) {
+  //     const base64String = user.urlUpdateImage; // replace with your base64 string
+  //     const filename = user.urlImage;
 
-      fetch(base64String)
-        .then((res) => res.blob())
-        .then((blob) => {
-          const file = new File([blob], filename, { type: "image/jpeg" });
-          console.log(file);
-          dispatch(setImageProfile(file));
+  //     fetch(base64String)
+  //       .then((res) => res.blob())
+  //       .then((blob) => {
+  //         const file = new File([blob], filename, { type: "image/jpeg" });
+  //         console.log(file);
+  //         dispatch(setImageProfile(file));
 
-        });
-    }
-  }, []);
-  const handleAddRecipeClick = () => {
+  //       });
+  //   }
+  // }, []);
+  const handleAddRecipeClick = async() => {
     handleCloseNavMenu();
     if (!isConnect) {
       setOpenFailed(true);
       return;
     }
-    dispatch(setType("add"));
+    let r = await dispatch(await setType("add"));
+    console.log("type",type);
     dispatch(setIngredients([{ name: "", amount: "", measure: "" }]));
     navigate("/addRecipe");
   };
@@ -98,6 +101,9 @@ function ResponsiveAppBar() {
       case "העורכים שלנו":
         navigate("editors");
         break;
+        case "צור קשר":
+          navigate("contact");
+          break;
       default:
         break;
     }
@@ -106,10 +112,10 @@ function ResponsiveAppBar() {
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
-  useEffect(() => {
-    console.log("image", image);
+  // useEffect(() => {
+  //   console.log("image", image);
 
-  }, [image]);
+  // }, [image]);
   return (
     <ThemeProvider theme={theme}>
       <AppBar
@@ -312,7 +318,7 @@ function ResponsiveAppBar() {
                     <Avatar sx={{ bgcolor: "primary" }}>
                       {
                         <img
-                          src={image&&image!=""&&image!="error" ? image : "../../images/profile.png"}
+                          src={user.urlImage&&user.urlImage!=""&&user.urlImage!="error" ? user.urlImage : "../../images/profile.png"}
                           className="profile-image"
                         />
                       }

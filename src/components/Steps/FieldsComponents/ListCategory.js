@@ -205,7 +205,7 @@ React.useEffect(() => {
         <InputWrapper ref={setAnchorEl} className={focused ? 'focused input' : 'input' }
         >
           {value.map((option, index) => (
-            <StyledTag label={option.title} {...getTagProps({ index })} />
+            <StyledTag label={option.name} {...getTagProps({ index })} />
           ))}
 
           <input className='inp-first' {...getInputProps()} />
@@ -215,7 +215,7 @@ React.useEffect(() => {
         <Listbox {...getListboxProps()}>
           {groupedOptions.map((option, index) => (
             <li {...getOptionProps({ option, index })}>
-              <span>{option.title}</span>
+              <span>{option.name}</span>
               <CheckIcon fontSize="small" />
             </li>
           ))}

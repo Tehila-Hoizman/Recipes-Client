@@ -4,6 +4,7 @@ import Search from "./Search";
 import AllEditors from "../Editors/AllEditors";
 import ByEditors from "../Editors/ByEditors";
 import { useEffect } from "react";
+import ByNewRecipes from "./ByNewRecipes";
 
 const Home = () => {
   useEffect(() => {
@@ -13,12 +14,9 @@ const Home = () => {
   return (
     <>
       <HomeMainDesign />
-      <Search  />
+      <ByNewRecipes/>
       <ByCategories/>
-
       <ByEditors/>
-      <Search/>
-      <Search/>
     </>
   );
 };

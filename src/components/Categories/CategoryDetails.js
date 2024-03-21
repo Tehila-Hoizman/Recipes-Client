@@ -12,24 +12,26 @@ const CategoryDetails = () => {
   const [orderBy, setOrderBy] = useState(1);
   const [category, setCategory] = useState(null);
   const [recipes, setRecipes] = useState([]);
-let sortedRecipes=[];
-  const handleChange = (event) => {
-    setOrderBy(event.target.value);
-    if(recipes.length>0)
 
-    switch (orderBy) {
+  const handleChange = (event) => {
+    const newOrderBy = event.target.value;
+    setOrderBy(newOrderBy);
+    if(recipes.length>0){
+    let sortedRecipes;
+
+    switch (newOrderBy) {
       case 1:
-       sortedRecipes = [...recipes].sort((a, b) => {
-          return new Date(b.uploadTime) - new Date(a.uploadTime);
-        });
-        setRecipes({...sortedRecipes});
+        sortedRecipes = [...recipes].sort((a, b) => new Date(a.uploadTime) - new Date(b.uploadTime));
+
+         console.log("sortedRecipes",sortedRecipes);
         break;
       case 2:
-       sortedRecipes = [...recipes].sort((a, b) => {
-          return new Date(a.uploadTime) - new Date(b.uploadTime);
-        });
-        setRecipes({...sortedRecipes});
+        sortedRecipes = [...recipes].sort((a, b) => new Date(b.uploadTime) - new Date(a.uploadTime));
+
+        console.log("sortedRecipes",sortedRecipes);
+
         break;
+
       case 3:
         categories.recipes.sort((a, b) => {
           return a.name.localeCompare(b.name);
@@ -43,16 +45,20 @@ let sortedRecipes=[];
       default:
         break;
     }
+    setCategory(prevCategory => ({ ...prevCategory, recipes: sortedRecipes }));
+
+  }
   };
   useEffect(() => {
-    setCategory(categories.find((x) => x.id == id));
     if(category)
     setRecipes(category.recipes);
-  console.log("recipes",recipes);
+  console.log("recipes ca",recipes);
       window.scrollTo(0, 0);
   
   }, [categories, id, category,recipes]);
-
+useEffect(() => {
+  setCategory(categories.find((x) => x.id == id));
+}, []);
   return (
     <div>
       {!category && (
@@ -74,8 +80,10 @@ let sortedRecipes=[];
         {category && category.recipes&&category.recipes.length>0&&recipes.length>0&&<div>
           <Box className="allCategories-header" >
     <Typography className="allCategories-header-title">{category.name}</Typography>
+
   </Box>
-          <FormControl fullWidth>
+  <Box className="allCategories-sort" >
+          <FormControl style={{width:"10%",marginLeft:"33px"}} >
           <InputLabel id="demo-simple-select-label">סדר על פי</InputLabel>
           <Select
             labelId="demo-simple-select-label"
@@ -84,12 +92,17 @@ let sortedRecipes=[];
             label="orderBy"
             onChange={handleChange}
           >
-            <MenuItem value={1}>חדש לישן</MenuItem>
-            <MenuItem value={2}>ישן לחדש</MenuItem>
+            <MenuItem value={1}>ישן לחדש</MenuItem>
+            <MenuItem value={2}>חדש לישן</MenuItem>
             <MenuItem value={3}>א-ת</MenuItem>
             <MenuItem value={3}>ת-א</MenuItem>
           </Select>
         </FormControl>
+        </Box>
+        <Typography className="editor-details-num-recipes">
+            {" "}
+            מתכונים({recipes.length})
+          </Typography>
         {recipes.map((recipe,inx)=>{
                 return(<Recipe key={inx} recipe = {recipe}/>)})}
                 </div>

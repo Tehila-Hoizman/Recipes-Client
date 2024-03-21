@@ -10,6 +10,10 @@ useEffect(() => {
     console.log(editor);
     }
     , [editor]);
+    useEffect(() => {
+      window.scrollTo(0, 0);
+    }
+    ,[]);
   return (        
 
     <Box className="editor-box"><Link to={`/editors/${editor.id}`}>

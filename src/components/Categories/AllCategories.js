@@ -4,13 +4,17 @@ import { useSelector } from "react-redux";
 import Category from "./Category";
 import "../../styles/AllCategories.css";
 import { useNavigate } from "react-router";
+import { useEffect } from "react";
 const AllCategories = () => {
   const categories = useSelector((state) => state.categories.categories);
   const navigate = useNavigate();
 const handleClick = () => {
     navigate("/addCategory");
   }
-
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }
+  ,[]);
   return (
     <Container className="allCategories">
               {/* <Box className="allCategories-header">
@@ -30,7 +34,7 @@ const handleClick = () => {
           </Box>
 
 
-      {categories.map((category, inx) => {
+      {Array.isArray(categories)&&categories.map((category, inx) => {
         return (
           <Box className="allCategories-box">
             <Category key={inx} category={category} />

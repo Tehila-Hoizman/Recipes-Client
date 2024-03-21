@@ -37,7 +37,7 @@ const RecipeDetails2 = () => {
   const [value, setValue] = useState(0);
   const levelOfDifficulty = ["קשה", "בינוני", "קל"];
 
-  const image = recipe && recipe.urlUpdateImageEditor ? recipe.urlUpdateImageEditor : null;
+  const image = recipe && recipe.urlImageEditor ? recipe.urlImageEditor : null;
 
   useEffect(() => {
     setRecipe(recipies.find((x) => x.id == id));
@@ -64,7 +64,7 @@ const RecipeDetails2 = () => {
         <Grid container direction="row" spacing={2} columns={16}>
           <Grid item xs={0} sm={3}></Grid>
           <Grid item xs={12} sm={6} className="details">
-            {recipe.image!="error"&&<img  className="gallery" src={recipe.image} />}
+            {recipe.urlImage!="error"&&<img  className="gallery" src={recipe.urlImage} />}
             <Typography variant="h5" component="h2">
               {recipe.name}
             </Typography>

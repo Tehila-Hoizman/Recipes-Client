@@ -1,8 +1,9 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
-import { pushRecipe } from "./recipiesSlice";
+import { pushRecipe, pushRecipeEdit } from "./recipiesSlice";
 import { List } from "immutable";
 import { pushRecipeToCategory } from "./categoriesSlice";
+
 const initialState = {
   name: "",
   description: "",
@@ -16,25 +17,17 @@ const initialState = {
   numOfPieces: 1,
   editorId: 0,
   status: "init",
-  type:"edit",
+  type:"add",
   editId:49,
-
 };
-
 export const addRecipe = createAsyncThunk(
   "addRecipe",
   async (recipe, thunkAPI) => {
     try {
-      const state = thunkAPI.getState(); // Get the current state
-      const {
-        categories,
-        image,
-      } = state.addRecipe;
+      const state = thunkAPI.getState();
+      const {categories,image,} = state.addRecipe;
       const formData = new FormData();
-      recipe.categories.forEach((c) => {
-        formData.append("CategoriesId", c.id);
-      });
-
+      recipe.categories.forEach((c) => {formData.append("CategoriesId", c.id);});
       formData.append('FilelImage', image);
       formData.append("Name", recipe.name);
       formData.append("Description", recipe.description);
@@ -59,20 +52,17 @@ export const addRecipe = createAsyncThunk(
       let r = response.data;
       r = {
         ...r,
-        urlUpdateImageEditor: thunkAPI.getState().login.user.urlUpdateImage,
+        urlImageEditor: thunkAPI.getState().login.user.urlImage,
         editorName:
           thunkAPI.getState().login.user.firstName +
           " " +
           thunkAPI.getState().login.user.lastName,
       };
-
       thunkAPI.dispatch(pushRecipe(r));
       console.log(categories);
-debugger
       categories.forEach((c) => {
       thunkAPI.dispatch(pushRecipeToCategory({recipe:r,categoryId:c.id}));
       });
-
       return response.data;
     } catch (error) {
       console.log(error);
@@ -85,25 +75,11 @@ export const editRecipe = createAsyncThunk(
   async (recipe, thunkAPI) => {
     try {
       const state = thunkAPI.getState(); // Get the current state
-      const {
-        name,
-        description,
-        timeToMake,
-        difficultyLevel,
-        categories,
-        instructions,
-        ingredients,
-        image,
-        numOfPieces,
-        date,
-        editorId,
-        editId
-      } = state.addRecipe;
+      const {image,editId} = state.addRecipe;
       const formData = new FormData();
       recipe.categories.forEach((c) => {
         formData.append("CategoriesId", c.id);
       });
-
       formData.append('FilelImage', image);
       formData.append("Name", recipe.name);
       formData.append("Description", recipe.description);
@@ -125,23 +101,6 @@ export const editRecipe = createAsyncThunk(
         }
       );
       console.log(response);
-      // let r = response.data;
-      // r = {
-      //   ...r,
-      //   urlUpdateImageEditor: thunkAPI.getState().login.user.urlUpdateImage,
-      //   editorName:
-      //     thunkAPI.getState().login.user.firstName +
-      //     " " +
-      //     thunkAPI.getState().login.user.lastName,
-      // };
-
-      // thunkAPI.dispatch(pushRecipe(r));
-      // console.log(categories);
-
-      // categories.forEach((c) => {
-      // thunkAPI.dispatch(pushRecipeToCategory({recipe:r,categoryId:c.id}));
-      // });
-
       return response.data;
     } catch (error) {
       console.log(error);
@@ -149,14 +108,12 @@ export const editRecipe = createAsyncThunk(
     }
   }
 );
-
 export const addRecipeSlice = createSlice({
   name: "addRecipe",
   initialState,
   reducers: {
     setName: (state, action) => {
       state.name = action.payload;
-      console.log("setName", state.name);
     },
     setDescription: (state, action) => {
       state.description = action.payload;
@@ -178,11 +135,9 @@ export const addRecipeSlice = createSlice({
     },
     setImage: (state, action) => {
       state.image = action.payload;
-      console.log("setImage", state.image);
     },
     setNumOfPieces: (state, action) => {
       state.numOfPieces = action.payload;
-      console.log("setNumOfPieces", state.numOfPieces);
     },
     setEditorId: (state, action) => {
       state.editorId = action.payload;
@@ -194,7 +149,7 @@ export const addRecipeSlice = createSlice({
       state.type = action.payload;
     },
     setEditId: (state, action) => {
-      state.editId = action.payload;
+     state.editId = action.payload;
     },
     setImageUrl: (state, action) => {
       state.imageUrl = action.payload;
@@ -217,6 +172,7 @@ export const addRecipeSlice = createSlice({
     });
   },
 });
+
 export const {
   setName,
   setStatus,
@@ -233,4 +189,5 @@ export const {
   setType,
   setImageUrl,
 } = addRecipeSlice.actions;
+
 export default addRecipeSlice.reducer;

@@ -14,7 +14,7 @@ import { setEditId, setType } from "../../store/addRecipeSlice";
 const Recipe = (props) => {
   const { recipe, allowed } = props;
   const image =
-    recipe && recipe.urlUpdateImageEditor ? recipe.urlUpdateImageEditor : null;
+    recipe && recipe.urlImageEditor ? recipe.urlImageEditor : null;
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const handleClick = () => {
@@ -48,10 +48,10 @@ const Recipe = (props) => {
   return (
     <div className="card d-inline-block">
       <div className="card-header-box">
-        {recipe.image != "error" && (
-          <img src={recipe.image} class="card-img-top" alt="logo" />
+        {recipe.urlImage !== "error" && (
+          <img src={recipe.urlImage} class="card-img-top" alt="logo" />
         )}
-        {recipe.image == "error" && (
+        {recipe.urlImage === "error" && (
           <img src="../../r-1.webp" class="card-img-top" alt="logo" />
         )}
         {allowed && (
@@ -101,6 +101,7 @@ const Recipe = (props) => {
                     <img
                       src={image ? image : "../../images/profile.png"}
                       className="profile-image"
+                      alt="profile"
                     />
                   }
                   {/* {user.firstName[0]} */}

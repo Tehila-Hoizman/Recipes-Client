@@ -4,11 +4,15 @@ import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import "../../styles/ByEditor.css"
 import Editor from "./Editor";
+import { useEffect } from "react";
 const ByEditors = () => {
     const recipies = useSelector((state) => state.recipies.recipies);
 
     const editors = useSelector((state) => state.recipies.editors);
-
+    useEffect(() => {
+      window.scrollTo(0, 0);
+    }
+    ,[]);
   return (
     <div className="design-container">
     <Container className="byEditors">

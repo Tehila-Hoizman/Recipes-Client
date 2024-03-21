@@ -23,6 +23,10 @@ const EditorDetails = () => {
 
     setRecipesByEditor(recipes.filter((x) => x.editorId == id));
   }, [, editors, recipes]);
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }
+  ,[]);
   return (
     <div>
       {!editor && (

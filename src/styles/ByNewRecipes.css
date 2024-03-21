@@ -1,15 +1,15 @@
-.editor-box {
+.design-container-byNewRecipes {
   width: 100%;
-  margin: 10px;
+  margin-top: 50px;
 }
 
-.byEditors {
+.byNewRecipes {
   display: flex;
   background-color: white;
   padding: 20px;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
 }
-.byEditors a {
+.byNewRecipes a {
   color: #76110a;
 }
 
@@ -18,7 +18,7 @@ img.MuiAvatar-img {
   background-color: antiquewhite;
 }
 
-.MuiContainer-root.byEditors.MuiContainer-maxWidthLg {
+.byNewRecipes {
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -26,18 +26,18 @@ img.MuiAvatar-img {
   flex-wrap: wrap;
 }
 
-p.MuiTypography-root.byEditors-title.MuiTypography-body1 {
+.byNewRecipes-title {
   width: 100%;
   /* display: block; */
-  font-size: 27px;
+  font-size: 27px !important;
   text-align: right;
   color: #76110a;
   font-family: system-ui;
 }
 
-.to-all-editors {
+.to-all-recipes {
   display: flex;
   width: 100%;
   flex-direction: row;
   justify-content: flex-end;
-}/*# sourceMappingURL=ByEditor.css.map */
+}/*# sourceMappingURL=ByNewRecipes.css.map */

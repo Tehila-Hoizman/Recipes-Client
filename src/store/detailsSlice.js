@@ -1,16 +1,13 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
-import { useDispatch } from "react-redux";
 const initialState = {
   recipeDetailsId: null,
     status:"init",
     recipe:null
 };
 export const getRecipe = createAsyncThunk('getRecipe',async (recipeId, thunkAPI) => {
-    console.log('in getRecipe');
     try{
     const response = await axios.get(`https://localhost:7161/api/Recipe/${recipeId}`)
-    console.log("recipe44 ",response);
     if(response.data){
         return response.data;
     }
@@ -19,7 +16,6 @@ export const getRecipe = createAsyncThunk('getRecipe',async (recipeId, thunkAPI)
     }    
 },
 )
-
 export const detailsSlice = createSlice({
   name: "details",
   initialState,

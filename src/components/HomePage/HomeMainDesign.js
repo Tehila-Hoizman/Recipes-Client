@@ -10,10 +10,11 @@ import { useState } from "react";
 import { setIngredients, setType } from "../../store/addRecipeSlice";
 
 const HomeMainDesign = () => {
-  const isConnect = useSelector((state) => state.login.isConnect);
   const navigate = useNavigate();
-  const [openFailed, setOpenFailed] = useState(false);
   const dispatch = useDispatch();
+  const isConnect = useSelector((state) => state.login.isConnect);
+  const [openFailed, setOpenFailed] = useState(false);
+  
   const goSignIn = () => {
     navigate("/signin");
   };
@@ -25,9 +26,9 @@ const HomeMainDesign = () => {
     }
     dispatch(setIngredients([{ name: "", amount: "", measure: "" }]));
     dispatch(setType("add"));
-
     navigate("/addRecipe");
   };
+  
   return (
       <Container className="container">
         <Box className="content">
@@ -56,9 +57,9 @@ const HomeMainDesign = () => {
                   width:" 160px",
                   height: "48px",
                 }}
-                onClick={() => navigate("#search-box")}
+                onClick={() => navigate("/recipies")}
               >
-                חיפוש מתכון
+                למתכונים שלנו
               </Button >
             </ButtonGroup>
           </ThemeProvider>

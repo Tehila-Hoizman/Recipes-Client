@@ -1,6 +1,6 @@
 import { Link, useNavigate } from "react-router-dom";
 import "../../styles/Recipe.css";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import TimeAgo from "./TimeAgo";
 import { Avatar, Button, Grid } from "@mui/material";
 import { addFavorite, deleteRecipe, popRecipe, removeFavorite } from "../../store/recipiesSlice";
@@ -13,8 +13,11 @@ import { setEditId, setType } from "../../store/addRecipeSlice";
 
 const Recipe = (props) => {
   const { recipe, allowed } = props;
+  const user = useSelector((state)=>state.login.user)
+  const isConnect = useSelector((state)=>state.login.isConnect)
   const image =
     recipe && recipe.urlImageEditor ? recipe.urlImageEditor : null;
+    const [fav,setFav]=useState(false);
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const handleClick = () => {
@@ -23,11 +26,12 @@ const Recipe = (props) => {
   };
 
   const setFavorite = (e) => {
-    debugger;
     if(e.target.checked){
       dispatch(addFavorite(recipe.id));
+      setFav(true);
     }else{
       dispatch(removeFavorite(recipe.id));
+      setFav(false);
     }
   }
   const handleEdit = () => {
@@ -44,6 +48,9 @@ const Recipe = (props) => {
 
   useEffect(() => {
     console.log(recipe);
+    if(isConnect)
+    if(Array.isArray(user.followers)&&user.followers.some(x=>x.recipeId==recipe.id))
+    setFav(true)
   }, [recipe]);
   return (
     <div className="card d-inline-block">
@@ -52,7 +59,7 @@ const Recipe = (props) => {
           <img src={recipe.urlImage} class="card-img-top" alt="logo" />
         )}
         {recipe.urlImage === "error" && (
-          <img src="../../r-1.webp" class="card-img-top" alt="logo" />
+          <img src="../../default-recipe.png" class="card-img-top" alt="logo" />
         )}
         {allowed && (
           <Box className="allowed-btns">
@@ -77,6 +84,7 @@ const Recipe = (props) => {
           className="favorite"
           onChange={setFavorite}
           checkedIcon={<Favorite className="favorite2" />}
+          checked={fav}
         />
       </div>
       <div className="card-body">
@@ -96,6 +104,7 @@ const Recipe = (props) => {
           >
             <Grid item sm={6}>
               <Box className="user-box">
+              {/* <Link to={`/editors/${recipe.editorId}`}> */}
                 <Avatar sx={{ bgcolor: "primary" }}>
                   {
                     <img
@@ -106,6 +115,7 @@ const Recipe = (props) => {
                   }
                   {/* {user.firstName[0]} */}
                 </Avatar>
+                {/* </Link> */}
                 {/* <Avatar
                   alt="Remy Sharp"
                   src="../../images/profile.png"

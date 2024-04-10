@@ -31,6 +31,9 @@ const TimeAgo = (props) => {
       now.getUTCMinutes(),
       now.getUTCSeconds()
     );
+
+
+    
     if(!date.toString().includes("+02:00"))
     utcUploadTime = utcUploadTime + 7200000;
     const diffMs = utcNowTime - utcUploadTime; // Difference in milliseconds

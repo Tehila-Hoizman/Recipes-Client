@@ -7,7 +7,7 @@
 }
 
 .contact {
-  margin: 64px 0;
+  margin: 30px 0 !important;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
   background-color: white;
   padding: 33px;

@@ -11,7 +11,7 @@ const MyRecipes = () => {
         <Container>
             <h1>המתכונים שלי</h1>
             {
-                recipes.filter((r)=>r.editorId===user.id).map((r)=>{
+                Array.isArray(recipes)&& recipes.filter((r)=>r.editorId===user.id).map((r)=>{
                     return (
                         <Recipe recipe = {r} allowed = {true} />
                     )

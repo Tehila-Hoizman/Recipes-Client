@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 import { getImageComment } from "./commentsSlice";
-import { getImage } from "./loginSlice";
+import { getImage, setFollowers } from "./loginSlice";
 
 const initialState = {
   recipies: [],
@@ -62,39 +62,70 @@ export const deleteRecipe = createAsyncThunk(
     return response.data;
   }
 );
+// export const addFavorite = createAsyncThunk(
+//   "addFavorite",
+//   async (id, thunkAPI) => {
+//     try {
+//       let r = thunkAPI
+//         .getState()
+//         .recipies.recipies.find((recipe) => recipe.id === id);
+//       const formData = new FormData();
+//       if (r.categories) {
+//         r.categories.forEach((c) => {
+//           formData.append("CategoriesId", c.id);
+//         });
+//       }
+//       formData.append("FilelImage", r.image);
+//       formData.append("Name", r.name);
+//       formData.append("Description", r.description);
+//       formData.append("Instructions", r.instructions);
+//       formData.append("DurationOfPreparation", r.durationOfPreparation);
+//       formData.append("LevelOfDifficulty", r.levelOfDifficulty);
+//       formData.append("NumOfPieces", r.numOfPieces);
+//       formData.append("EditorId", r.editorId);
+//       formData.append("UploadTime", r.uploadTime);
+//       formData.append("UrlImage", r.urlImage);
+
+//       if (Array.isArray(r.usersId)) {
+//         r.usersId.forEach((u) => {
+//           formData.append("usersId", u.id);
+//         });
+//       }
+//       formData.append("usersId", thunkAPI.getState().login.user.id);
+
+//       await axios.put(`https://localhost:7161/api/Recipe/${id}`, formData);
+//     } catch (error) {
+//       console.log(error);
+//     }
+//   }
+// );
+
 export const addFavorite = createAsyncThunk(
   "addFavorite",
   async (id, thunkAPI) => {
     try {
+      debugger
       let r = thunkAPI
         .getState()
         .recipies.recipies.find((recipe) => recipe.id === id);
-      const formData = new FormData();
-      if (r.categories) {
-        r.categories.forEach((c) => {
-          formData.append("CategoriesId", c.id);
-        });
-      }
-      formData.append("FilelImage", r.image);
-      formData.append("Name", r.name);
-      formData.append("Description", r.description);
-      formData.append("Instructions", r.instructions);
-      formData.append("DurationOfPreparation", r.durationOfPreparation);
-      formData.append("LevelOfDifficulty", r.levelOfDifficulty);
-      formData.append("NumOfPieces", r.numOfPieces);
-      formData.append("EditorId", r.editorId);
-      formData.append("UploadTime", r.uploadTime);
-      formData.append("UrlImage", r.urlImage);
 
-      if (Array.isArray(r.usersId)) {
-        r.usersId.forEach((u) => {
-          formData.append("usersId", u.id);
-        });
-      }
-      formData.append("usersId", thunkAPI.getState().login.user.id);
 
-      await axios.put(`https://localhost:7161/api/Recipe/${id}`, formData);
-    } catch (error) {
+      let res =await axios.post(`https://localhost:7161/api/Follower`, 
+      {
+        userId: thunkAPI.getState().login.user.id,
+        recipeId: r.id,
+      },
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+
+    console.log("res", res);   
+    let followers = thunkAPI.getState().login.user.followers;
+    thunkAPI.dispatch( setFollowers([...followers,{id:0,recipeId:r.id,userId:thunkAPI.getState().login.user.id,recipe:r}]))
+    console.log("followers", thunkAPI.getState().login.user.followers);
+   } catch (error) {
       console.log(error);
     }
   }
@@ -103,19 +134,25 @@ export const removeFavorite = createAsyncThunk(
   "removeFavorite",
   async (id, thunkAPI) => {
     try {
-      thunkAPI
+      debugger
+      let r = thunkAPI
         .getState()
-        .recipies.recipies.find((recipe) => recipe.id === id)
-        .UsersId.filter((x) => x.id != thunkAPI.getState().login.user.id);
-      axios.put(
-        `https://localhost:7161/api/Recipe/${id}`,
-        thunkAPI.getState().recipies.recipies.find((recipe) => recipe.id === id)
-      );
-    } catch (error) {
+        .recipies.recipies.find((recipe) => recipe.id === id);
+   debugger
+      let res =await axios.delete(`https://localhost:7161/api/Follower/
+      ${thunkAPI.getState().login.user.id}/${r.id}`, 
+);
+
+    console.log("res", res);    
+    let followers = thunkAPI.getState().login.user.followers;
+    thunkAPI.dispatch( setFollowers([...followers.filter(f=>f.recipeId!=r.id)]))
+    console.log("followers", thunkAPI.getState().login.user.followers);
+  } catch (error) {
       console.log(error);
     }
   }
 );
+;
 export const pushRecipe = createAsyncThunk(
   "pushRecipe",
   async (recipe, thunkAPI) => {

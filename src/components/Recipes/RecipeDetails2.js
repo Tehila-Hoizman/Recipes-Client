@@ -44,7 +44,10 @@ const RecipeDetails2 = () => {
     // setUser();
     setIngredientsToRecipe(ingredients.filter((x) => x.recipeId == id));
   }, [recipies, id, ingredients, measures]);
-
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }
+  ,[]);
   return (
     <div>
       {!recipe && (

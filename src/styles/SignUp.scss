@@ -2,4 +2,15 @@
     button{
         width: 96%;
     }
+    .error {
+        background-color: rgba(243, 205, 213, 0.3803921569);
+        color: #a60909;
+        font-size: 0.7rem !important;
+        border: none;
+        padding: 2px;
+        width: -moz-fit-content;
+        width: fit-content;
+    }
+
+
 }

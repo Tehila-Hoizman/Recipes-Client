@@ -17,7 +17,7 @@ const ByEditors = () => {
     <div className="design-container">
     <Container className="byEditors">
       <Typography className="byEditors-title">העורכים שלנו...</Typography>
-      {editors.slice(0,6).map((editor,inx)=>{
+      {Array.isArray(editors)&&editors.slice(0,6).map((editor,inx)=>{
         return(
       <Box className="byEditors-box">
       <Editor key={inx} editor = {editor}/>

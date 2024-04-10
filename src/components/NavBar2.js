@@ -151,10 +151,10 @@ function ResponsiveAppBar() {
             >
               <img
                 className="logo-foodeal"
-                src="../../logo-foodeal.png"
+                src="../../logo.png"
                 alt="Logo"
                 style={{
-                  width: "40%",
+                  width: "60%",
                   height: "auto",
                   maxWidth: "100%",
                   maxHeight: "15vh",
@@ -170,7 +170,7 @@ function ResponsiveAppBar() {
                 onClick={handleOpenNavMenu}
                 color="inherit"
               >
-                <MenuIcon />
+                <MenuIcon sx={{color:"white !important"}}/>
               </IconButton>
               <Menu
                 id="menu-appbar"
@@ -219,7 +219,7 @@ function ResponsiveAppBar() {
             >
               <img
                 className="logo-foodeal"
-                src="../../logo-foodeal.png"
+                src="../../logo.png"
                 alt="Logo"
                 style={{
                   width: "auto",

@@ -3,7 +3,7 @@ import axios from "axios";
 
 const initialState = {
   isConnect: false,
-  user: {urlImage:""},
+  user: {urlImage:"",followers:[]},
   status: "init",
   image: null,
 };
@@ -13,6 +13,8 @@ export const getUser = createAsyncThunk("getUser", async (user,thunkAPI) => {
     const res = await axios.get(
       `https://localhost:7161/api/User/${user.email}/${user.password}`
     );
+    console.log(res.data);
+
   return res.data;
   } catch (error) {
     console.log(error);
@@ -29,7 +31,7 @@ export const addUser = createAsyncThunk("addUser", async (user, thunkApi) => {
     formData.append("password", user.password);
     formData.append("level", user.level);
     formData.append("wantNewsletter", user.wantNewsletter);
-    formData.append("filelImage", user.filelImage);
+    formData.append("filelImage", null);
     formData.append("urlImage", user.urlImage);
     const response = await axios.post(
       `https://localhost:7161/api/User`,
@@ -41,6 +43,7 @@ export const addUser = createAsyncThunk("addUser", async (user, thunkApi) => {
       }
     );
     console.log(response);
+    debugger
     return response.data;
   } catch (error) {
     return error;
@@ -120,11 +123,16 @@ export const loginSlice = createSlice({
       state.image = action.payload;
       console.log(state.status);
     },
+    setFollowers: (state,action)=>{
+      state.user.followers = action.payload;
+      console.log("state.user.followers",state.user.followers);
+    }
   },
   extraReducers: (builder) => {
     builder.addCase(addUser.fulfilled, (state, action) => {
       state.status = "fulfilled";
       state.user = action.payload;
+
 
     });
     builder.addCase(addUser.rejected, (state, action) => {
@@ -142,6 +150,7 @@ export const loginSlice = createSlice({
     builder.addCase(getUser.fulfilled, (state, action) => {
       state.status = "fulfilled";
       state.user = action.payload;
+      
     });
     builder.addCase(getUser.rejected, (state, action) => {
       state.status = "rejected";
@@ -150,5 +159,5 @@ export const loginSlice = createSlice({
     });
   },
 });
-export const { disconnect, connect, setUser, setAlert, setStatus,setImageProfile } =loginSlice.actions;
+export const { disconnect, connect, setUser, setAlert, setStatus,setImageProfile ,setFollowers} =loginSlice.actions;
 export default loginSlice.reducer;

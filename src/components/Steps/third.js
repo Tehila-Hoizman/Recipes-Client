@@ -22,7 +22,8 @@ const Third = (props) => {
     const ingToDelete = props.ingToDelete;
     const measures = useSelector((state) => state.measures.measures);
     const ingredients = useSelector((state) => state.addRecipe.ingredients);
-  const [measureSelected, setMeasureSelected] = useState(measures[0].id);
+    let m =Array.isArray(measures)?measures[0].id:"";
+  const [measureSelected, setMeasureSelected] = useState(m);
   const dispatch = useDispatch();
 
   const handleChange = (e,value, index) => {

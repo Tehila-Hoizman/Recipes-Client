@@ -13,10 +13,11 @@ import Footer from "./components/Footer";
 import Routes from "./components/RouterRoutes";
 import "./App.css";
 import RouterRoutes from "./components/RouterRoutes";
+import { useSelector } from "react-redux";
 
 function App() {
   const dispatch = useDispatch();
-
+const user = useSelector((state) => state.login.user);
   useEffect(() => {
     const fetchData = async () => {
       await dispatch(fetchMeasures());
@@ -27,6 +28,7 @@ function App() {
       dispatch(fetchComments());
     };
     fetchData();
+    console.log(user);
   }, []);
 
   return (

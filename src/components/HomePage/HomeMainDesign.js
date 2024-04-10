@@ -33,7 +33,7 @@ const HomeMainDesign = () => {
       <Container className="container">
         <Box className="content">
           <ThemeProvider theme={tHome}>
-            <Typography>FooDeal</Typography>
+            <Typography>Delicious</Typography>
             <ButtonGroup sx={{ display: "flex" }}>
               <Button
                 sx={{

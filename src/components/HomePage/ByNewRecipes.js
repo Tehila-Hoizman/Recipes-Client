@@ -9,12 +9,14 @@ const ByNewRecipes = () => {
     const [newRecipies, setNewRecipies] = useState([]);
 
     useEffect(() => {
+      if(Array.isArray(recipies)){
         setNewRecipies([...recipies]);
         console.log("newRecipies", newRecipies);
 
         setNewRecipies(newRecipies=>newRecipies.sort((a,b)=>new Date(b.uploadTime)-new Date(a.uploadTime)).slice(0, 4))
         console.log("newRecipies", newRecipies);
     }
+  }
     ,[recipies]);
     return ( 
         <div className="design-container-byNewRecipes">
@@ -23,7 +25,7 @@ const ByNewRecipes = () => {
             החדשים שלנו...
           </Typography>
   
-          {newRecipies.map((recipe, inx) =>  <Recipe recipe={recipe} key={inx} />)}
+          {Array.isArray(newRecipies)&&newRecipies.map((recipe, inx) =>  <Recipe recipe={recipe} key={inx} />)}
           <Box className="to-all-recipes">
             <Link to="/recipies">לכל המתכונים</Link>
           </Box>

@@ -55,39 +55,96 @@ export default function SignUp() {
   const status = useSelector((state) => state.login.status);
   const [isOk, setIsOk] = useState(false);
   const [openSuccess, setOpenSuccess] = useState(false);
-
+  const [firstNameInValid,setfirstNameInValid] = useState("");
+  const [lastNameInValid,setLastNameInValid] = useState("");
+  const [emailInValid,setEmailInValid] = useState("");
+  const [passwordInValid,setPasswordInValid] = useState("");
 
   const connectSite =()=>{
     dispatch(connect());
     navigate("/");
   }
-
+  const validateEmail = (email) => {
+    // Regular expression for email validation
+    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return regex.test(email);
+  };
+const isValid = (data)=>{
+  let flag = true;
+  if(data.get("firstName")==""){
+    setfirstNameInValid("שדה חובה");
+    flag=false;
+  }else{
+    setfirstNameInValid("");
+  }
+  if(data.get("lastName")==""){
+    setLastNameInValid("שדה חובה");
+    flag=false;
+  }else{
+    setLastNameInValid("");
+  }
+  if(data.get("email")==""){
+    setEmailInValid("שדה חובה");
+    flag=false;
+  }else{
+    if(!validateEmail(data.get("email")))
+    setEmailInValid("אימייל לא חוקי");
+  else{
+    setEmailInValid("");
+  }
+  }
+  if(data.get("password")==""){
+    setPasswordInValid("שדה חובה");
+    flag=false;
+  }else{
+    setPasswordInValid("");
+  }
+return flag;
+}
   const handleSubmit = async(event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    console.log("data", data);
-    let obj = {
-      firstName: data.get("firstName"),
-      lastName: data.get("lastName"),
-      email: data.get("email"),
-      password: data.get("password"),
-      level: 0,
-      wantNewsletter: 0,
-      // FilelImage:data.get("image-upload").name == "" ? null : data.get("image-upload"),
-      urlImage: null,
-    };
-
-    setIsOk(true);
-    console.log("obj", obj);
-    let res = await dispatch(addUser(obj));
-
-    if (addUser.fulfilled.match (res)) {
-      await dispatch(setStatus("init"));
-      console.log("sdhjkafhisyu");
-      setOpenSuccess(true);
-
+    if(isValid(data)){
+    try{
+    let res = await axios.post(`https://localhost:7161/api/User/isEmailExist`, { email: data.get("email") }, // Send email as JSON
+    {
+      headers: {
+        'Content-Type': 'application/json' // Specify content type as JSON
       }
-
+    });
+    if(!res.data){
+      setEmailInValid("");
+      console.log("data", data);
+      let obj = {
+        firstName: data.get("firstName"),
+        lastName: data.get("lastName"),
+        email: data.get("email"),
+        password: data.get("password"),
+        level: 0,
+        wantNewsletter: 0,
+        // FilelImage:data.get("image-upload").name == "" ? null : data.get("image-upload"),
+        urlImage: null,
+      };
+  
+      setIsOk(true);
+      console.log("obj", obj);
+      let res = await dispatch(addUser(obj));
+  
+      if (addUser.fulfilled.match (res)) {
+        await dispatch(setStatus("init"));
+        console.log("sdhjkafhisyu");
+        setOpenSuccess(true);
+  
+        }
+  
+    }else{
+      // alert("this email already exist");
+      setEmailInValid("מייל זה כבר רשום במערכת")
+    }
+  }catch(err){
+    throw new Error(err.message);
+  }
+}
   };
 
 
@@ -127,8 +184,10 @@ export default function SignUp() {
                   fullWidth
                   id="firstName"
                   label="שם פרטי"
+                  sx={{marginBottom:"4px"}}
                   autoFocus
                 />
+                                <Typography className="error" sx={{fontSize:"0.7rem"}}>{firstNameInValid}</Typography>
               </Grid>
               <Grid item xs={12} sm={6}>
                 <TextField
@@ -138,7 +197,9 @@ export default function SignUp() {
                   label="שם משפחה"
                   name="lastName"
                   autoComplete="family-name"
+                  sx={{marginBottom:"4px"}}
                 />
+                                <Typography className="error" sx={{fontSize:"0.7rem"}}>{lastNameInValid}</Typography>
               </Grid>
               <Grid item xs={12}>
                 <TextField
@@ -148,7 +209,9 @@ export default function SignUp() {
                   label="אימייל"
                   name="email"
                   autoComplete="email"
+                  sx={{marginBottom:"4px"}}
                 />
+                <Typography className="error" sx={{fontSize:"0.7rem"}}>{emailInValid}</Typography>
               </Grid>
               <Grid item xs={12}>
                 {/* <TextField
@@ -160,7 +223,8 @@ export default function SignUp() {
                   id="password"
                   autoComplete="new-password"
                 /> */}
-                <PasswordInput/>
+                <PasswordInput                   sx={{marginBottom:"4px"}}/>
+                <Typography className="error" sx={{fontSize:"0.7rem"}}>{passwordInValid}</Typography>
               </Grid>
               <Grid item xs={12}>
                 <FormControlLabel

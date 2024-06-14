@@ -29,16 +29,13 @@ To get started with Recipes Client, follow these steps:
 `git clone https://github.com/tehila0601/Recipes-Client.git`
 
 2. Navigate to the project directory:
-cd Recipes-Client
-```
+`cd Recipes-Client`
 
 3. Install dependencies:
-npm install
-```
+`npm install`
 
 4. Run the application:
-npm start
-```
+`npm start`
 
 The application will start running on http://localhost:3000 by default.
 

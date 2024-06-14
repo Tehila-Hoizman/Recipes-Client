@@ -31,7 +31,7 @@ git clone https://github.com/tehila0601/Recipes-Client.git`
 ```
 3. Navigate to the project directory:
 ```
-cd Recipes-Client`
+cd Recipes-Client
 ```
 
 4. Install dependencies:

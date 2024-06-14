@@ -26,24 +26,24 @@ Recipes Client is a front-end application built to interact with the Recipes Ser
 To get started with Recipes Client, follow these steps:
 
 1. Clone the repository:
-
-  git clone https://github.com/tehila0601/Recipes-Client.git
-
+``
+git clone https://github.com/tehila0601/Recipes-Client.git
+```
 
 2. Navigate to the project directory:
-
-  cd Recipes-Client
-
+```
+cd Recipes-Client
+```
 
 3. Install dependencies:
-
-  npm install
-
+```
+npm install
+```
 
 4. Run the application:
-
-  npm start
-
+```
+npm start
+```
 
 The application will start running on http://localhost:3000 by default.
 
@@ -54,7 +54,7 @@ The application will start running on http://localhost:3000 by default.
 - Axios: A promise-based HTTP client for the browser and Node.js.
 - React Router: A standard routing library for React.
 
-##good luck!
+## good luck!
 
   
 

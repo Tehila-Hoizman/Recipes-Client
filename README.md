@@ -2,7 +2,7 @@
 
 ## Server Side
 
-The server-side code for this project can be found in the [[Recipes Server](https://github.com/tehila0601/Recipes-Server)](https://github.com/tehila0601/Recipes-Server) repository.
+The server-side code for this project can be found in the [Recipes Server](https://github.com/tehila0601/Recipes-Server) repository.
 
 ## Recipes Client
 

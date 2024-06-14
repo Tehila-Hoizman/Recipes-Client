@@ -26,8 +26,7 @@ Recipes Client is a front-end application built to interact with the Recipes Ser
 To get started with Recipes Client, follow these steps:
 
 1. Clone the repository:
-git clone https://github.com/tehila0601/Recipes-Client.git
-```
+`git clone https://github.com/tehila0601/Recipes-Client.git`
 
 2. Navigate to the project directory:
 cd Recipes-Client
